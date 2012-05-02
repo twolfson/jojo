@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><%=title%></title>
+  <id><%=url%></id>
+<%
+  if (articles.length > 0) {
+    var updatedDate = articles[0].date,
+        updatedDateStr = updateDate.toISOString();
+%>
+  <updated><%=updatedDateStr%></updated>
+<%
+  }
+%>
+  <author>
+    <name><%=author%></name>
+  </author>
+
+<%
+  function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;")..replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  }
+
+  articles.forEach(function (article) {
+%>
+  <entry>
+    <title><%=article.title%></title>
+    <link rel="alternate" href="<%=article.url%>"/>
+    <id><%=article.url%></id>
+    <published><%=article.date.toISOString()%></published>
+    <updated><%=article.date.toISOString()%></updated>
+    <author>
+      <name><%=author%></name>
+    </author>
+    <summary type="html"><%=escapeHtml(article.summary)%></summary>
+    <content type="html"><%=escapeHtml(article.body)%></content>
+  </entry>
+<%
+  });
+%>
+</feed>
