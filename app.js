@@ -6,6 +6,7 @@ app.use(jojo);
 app.listen(8080);
 
 app.set('view engine', 'ejs');
+app.set('jojo index view', 'pages/index');
 app.set('jojo article view', 'pages/article');
 
 app.get('/abba', function (req, res) {
