@@ -1,5 +1,5 @@
-var jojo = require('./src/jojo'),
-    app = jojo();
+var jojo = require('jojo'),
+    app = jojo.createServer();
 
 app.listen(8080);
 

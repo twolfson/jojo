@@ -1,4 +1,4 @@
 
 /startServer.cmd
-/node_modules
+/node_modules/jojo/node_modules
 /nodemonw.exe
