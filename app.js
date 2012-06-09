@@ -7,6 +7,7 @@ app.listen(8080);
 
 app.get('/abba', function (req, res) {
   res.send([
+    'Hey',
     '<script src="https://raw.github.com/twolfson/File-Watcher/master/src/watcher.js"></script>        ',
     '<script src="https://raw.github.com/twolfson/Resource-Collector/master/src/collector.js"></script>',
     '<script>                                                                                          ',
