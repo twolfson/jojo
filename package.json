@@ -1,22 +1,22 @@
 {
   "author": "Todd Wolfson <todd@twolfson.com> (http://twolfson.com/)",
-  "name": "jojo",
-  "description": "the 10 second blog-engine for hackers (in javascript)",
+  "name": "jojo demo",
+  "description": "Demo server for jojo - the 10 second blog-engine for hackers (in javascript)",
   "version": "0.1.0",
   "homepage": "https://github.com/twolfson/jojo",
   "repository": {
     "type": "git",
     "url": "git@github.com:twolfson/jojo.git"
   },
-  "main": "src/jojo.js",
+  "main": "app.js",
   "engines": {
     "node": ">= 0.4.0"
   },
   "dependencies": {
-    "express": ">= 2.0.0",
-    "async": "*",
-    "showdown": "*"
+    "jojo": "*"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "ejs": "*"
+  },
   "optionalDependencies": {}
 }
