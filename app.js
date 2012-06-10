@@ -1,7 +1,7 @@
+// Require jojo and create a server
 var jojo = require('jojo'),
+// jojo.createServer makes an express server and auto-uses jojo
     app = jojo.createServer();
-
-app.use(jojo);
 
 app.listen(8080);
 
