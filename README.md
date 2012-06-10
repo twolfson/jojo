@@ -44,7 +44,8 @@ app.settings['jojo settingB'] = true;
 Default settings
 ----------------
 ```
-// Base URL used by jojo for all blog posts (i.e. http://localhost:8080/ will be an index page containing summaries of recent blog posts.)
+// Base URL used by jojo for all blog posts
+// (i.e. http://localhost:8080/ will be an index page containing summaries of recent blog posts.)
 app.set('jojo basepath', '/');
 
 // Directory where articles are read from
