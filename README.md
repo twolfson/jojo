@@ -1,6 +1,7 @@
 jojo
 ====
-the 10 second blog-engine for hackers (in javascript)
+the 10 second blog-engine for hackers (in javascript).
+
 Inspired heavily by [toto](https://github.com/cloudhead/toto)
 
 I rewrote it because I was frustrated at not being able integrate with my current server without starting 2 servers.
