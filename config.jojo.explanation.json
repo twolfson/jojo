@@ -3,6 +3,5 @@
   "author": "Todd Wolfson", // blog author
   "title": "jojo demo", // site title
   "url": "http://localhost:8080/", // site url
-  "static": true, // false, true, "watch"
   "disqus": false // disqus id (optional)
 }
