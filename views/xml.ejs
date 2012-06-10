@@ -4,8 +4,8 @@
   <id><%=url%></id>
 <%
   if (articles.length > 0) {
-    var updatedDate = articles[0].date,
-        updatedDateStr = updateDate.toISOString();
+    var updatedDate = articles[0].rawDate,
+        updatedDateStr = updatedDate.toISOString();
 %>
   <updated><%=updatedDateStr%></updated>
 <%
@@ -16,23 +16,19 @@
   </author>
 
 <%
-  function escapeHtml(str) {
-    return str.replace(/&/g, "&amp;")..replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
-  }
-
   articles.forEach(function (article) {
 %>
   <entry>
     <title><%=article.title%></title>
     <link rel="alternate" href="<%=article.url%>"/>
     <id><%=article.url%></id>
-    <published><%=article.date.toISOString()%></published>
-    <updated><%=article.date.toISOString()%></updated>
+    <published><%=article.rawDate.toISOString()%></published>
+    <updated><%=article.rawDate.toISOString()%></updated>
     <author>
       <name><%=author%></name>
     </author>
-    <summary type="html"><%=escapeHtml(article.summary)%></summary>
-    <content type="html"><%=escapeHtml(article.body)%></content>
+    <summary type="html"><%=article.summary%></summary>
+    <content type="html"><%=article.content%></content>
   </entry>
 <%
   });
