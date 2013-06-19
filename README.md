@@ -1,4 +1,4 @@
-jojo
+jojo [![Donate on Gittip](http://badgr.co/gittip/twolfson.png)](https://www.gittip.com/twolfson/)
 ====
 the 10 second blog-engine for hackers (in javascript).
 
