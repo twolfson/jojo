@@ -1,40 +1,29 @@
 // Load in dependencies
-var assert = require('assert'),
-    jojo = require('../src/jojo');
+var spawn = require('child_process').spawn,
+    assert = require('assert');
 
 // Export doubleshot methods
 module.exports = {
+  // Placeholder starting fn
   'jojo': function () {
-
   },
+
+  // Invoke jojo in various forms
   'run via CLI': function () {
-
-  },
-  'starts a server': function () {
-
-  },
-  'serves articles': function () {
 
   },
   'integrated into a server': function () {
 
   },
-  'serves an index page': function () {
-
-  },
-  'serves articles': function () {
-
-  },
-  'serves an RSS feed': function () {
-
-  },
   'jojo running with no articles': function () {
 
   },
-  'serves an index page': function () {
+
+  // Assertions against jojo
+  'serves articles': function () {
 
   },
-  'serves articles': function () {
+  'serves an index page': function () {
 
   },
   'serves an RSS feed': function () {
