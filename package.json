@@ -12,11 +12,16 @@
   "engines": {
     "node": ">= 0.4.0"
   },
+  "scripts": {
+    "test": "doubleshot src-test"
+  },
   "dependencies": {
     "express": ">= 2.0.0",
     "async": "~0.1.22",
     "showdown": "~0.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "doubleshot": "~2.10.0"
+  },
   "optionalDependencies": {}
 }
