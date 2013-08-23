@@ -13,10 +13,7 @@ module.exports = {
   runChildProcess: {
     before: function spawnChildProcess (done) {
       // Start up a child server
-      this.child = spawn('node', ['app.js'], {
-        cwd: this.cwd,
-        stdio: [0, 1, 2]
-      });
+      this.child = spawn(this.cmd, this.args, this.options);
 
       // After it loads, callback
       setTimeout(done, 200);
@@ -32,17 +29,25 @@ module.exports = {
       });
     }
   },
-  'run via CLI': function () {
-  },
   'integrated into a server': [
     function startIntegratedServer () {
-      this.cwd = __dirname + '/test_files/integrated';
+      this.cmd = 'node';
+      this.args = ['app.js'];
+      this.options = {
+        cwd:  __dirname + '/test_files/integrated',
+        // stdio: [0, 1, 2]
+      };
     },
     'runChildProcess'
   ],
   'jojo running with no articles': [
     function startEmptyServer () {
-      this.cwd = __dirname + '/test_files/empty_app';
+      this.cmd = 'node';
+      this.args = ['app.js'];
+      this.options = {
+        cwd:  __dirname + '/test_files/integrated',
+        // stdio: [0, 1, 2]
+      };
     },
     'runChildProcess'
   ],
