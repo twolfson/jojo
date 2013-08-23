@@ -1,9 +1,9 @@
 - 'jojo':
   # - 'run via CLI':
   #   - 'serves articles'
-  # - 'integrated into a server':
-  #   - 'serves an index page'
-  #   - 'serves articles'
-  #   - 'serves an RSS feed'
+  - 'integrated into a server':
+    - 'serves an index page'
+    - 'serves articles'
+    - 'serves an RSS feed'
 - 'jojo running with no articles':
   - 'serves content'

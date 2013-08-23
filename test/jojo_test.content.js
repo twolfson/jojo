@@ -10,39 +10,42 @@ module.exports = {
   },
 
   // Invoke jojo in various forms
-  // runChildProcess: ,
+  runChildProcess: {
+    before: function spawnChildProcess (done) {
+      // Start up a child server
+      this.child = spawn('node', ['app.js'], {
+        cwd: this.cwd,
+        stdio: [0, 1, 2]
+      });
+
+      // After it loads, callback
+      setTimeout(done, 200);
+    },
+    after: function killChildProcess (done) {
+      // Kill the child process
+      var child = this.child;
+      child.kill();
+
+      // When it leaves, callback
+      child.on('exit', function (code) {
+        done();
+      });
+    }
+  },
   'run via CLI': function () {
-
   },
-  'jojo running with no articles': {
-  // 'integrated into a server': {
-      before: function spawnChildProcess (done) {
+  'integrated into a server': [
+    function startIntegratedServer () {
+      this.cwd = __dirname + '/test_files/integrated';
+    },
+    'runChildProcess'
+  ],
+  'jojo running with no articles': [
+    function startEmptyServer () {
       this.cwd = __dirname + '/test_files/empty_app';
-        // this.cwd = __dirname + '/test_files/integrated';
-        // Start up a child server
-        this.child = spawn('node', ['app.js'], {
-          cwd: this.cwd,
-          stdio: [0, 1, 2]
-        });
-
-        // After it loads, callback
-        setTimeout(done, 200);
-      },
-      after: function killChildProcess (done) {
-        // Kill the child process
-        var child = this.child;
-        child.kill();
-
-        // When it leaves, callback
-        child.on('exit', function (code) {
-          done();
-        });
-      }
-  },
-  //   function startEmptyServer () {
-  //   },
-  //   'runChildProcess'
-  // ],
+    },
+    'runChildProcess'
+  ],
 
   // Assertions against jojo
   makeRequest: function (done) {
