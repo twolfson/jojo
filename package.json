@@ -21,7 +21,7 @@
     "showdown": "~0.0.1"
   },
   "devDependencies": {
-    "doubleshot": "~2.10.0",
+    "doubleshot": "~2.12.0",
     "request": "~2.27.0",
     "ejs": "~0.8.4",
     "chai": "~1.7.2"
