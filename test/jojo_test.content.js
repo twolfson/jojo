@@ -75,8 +75,7 @@ module.exports = {
       this.url = 'http://localhost:11550/index.xml';
     }, 'makeRequest',
     function assertRss () {
-      console.log(this.body);
-      // expect(this.body).to.contain('<h1>The Wonderful Wizard of Oz</h1>');
+      expect(this.body).to.contain('<id>1900-05-17-the-wonderful-wizard-of-oz</id>');
     }
   ]
 };
