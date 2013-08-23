@@ -45,6 +45,7 @@ module.exports = {
     request('http://localhost:11550/', function handleResponse (err, res, body) {
       console.log('ERROR:', err);
       console.log('BODY:', body);
+      done(err);
     });
   },
   'serves an index page': function () {

@@ -16,7 +16,7 @@
     "test": "doubleshot"
   },
   "dependencies": {
-    "express": ">= 2.0.0",
+    "express": "2.x.x",
     "async": "~0.1.22",
     "showdown": "~0.0.1"
   },
