@@ -53,19 +53,30 @@ module.exports = {
       done(err);
     });
   },
-  'serves articles': [
+  'serves an index page': [
     function requestHomepage () {
       this.url = 'http://localhost:11550/';
     }, 'makeRequest',
     function assertHomepage () {
+      expect(this.body).to.contain('<section id="articles">');
       expect(this.body).to.contain('the-wonderful-wizard-of-oz');
-      expect(this.body).to.contain('</footer>');
     }
   ],
-  'serves an index page': function () {
-
-  },
-  'serves an RSS feed': function () {
-
-  }
+  'serves articles': [
+    function requestArticle () {
+      this.url = 'http://localhost:11550/1900-05-17-the-wonderful-wizard-of-oz';
+    }, 'makeRequest',
+    function assertArticle () {
+      expect(this.body).to.contain('<h1>The Wonderful Wizard of Oz</h1>');
+    }
+  ],
+  'serves an RSS feed': [
+    function requestRss () {
+      this.url = 'http://localhost:11550/index.xml';
+    }, 'makeRequest',
+    function assertRss () {
+      console.log(this.body);
+      // expect(this.body).to.contain('<h1>The Wonderful Wizard of Oz</h1>');
+    }
+  ]
 };
