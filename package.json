@@ -23,7 +23,8 @@
   "devDependencies": {
     "doubleshot": "~2.10.0",
     "request": "~2.27.0",
-    "ejs": "~0.8.4"
+    "ejs": "~0.8.4",
+    "chai": "~1.7.2"
   },
   "optionalDependencies": {}
 }

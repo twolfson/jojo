@@ -1,7 +1,7 @@
 // Load in dependencies
 var spawn = require('child_process').spawn,
-    assert = require('assert'),
-    request = require('request');
+    request = require('request'),
+    expect = require('chai').expect;
 
 // Export doubleshot methods
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
       // Start up a child server
       this.child = spawn('node', ['app.js'], {
         cwd: __dirname + '/test_files/integrated',
-        stdio: [0, 1, 2]
+        // stdio: [0, 1, 2]
       });
 
       // After it loads, callback
@@ -41,13 +41,27 @@ module.exports = {
   },
 
   // Assertions against jojo
-  'serves articles': function (done) {
-    request('http://localhost:11550/', function handleResponse (err, res, body) {
-      console.log('ERROR:', err);
-      console.log('BODY:', body);
+  makeRequest: function (done) {
+    var that = this;
+    request(this.url, function handleResponse (err, res, body) {
+      // Save the error, response, and body
+      that.err = err;
+      that.res = res;
+      that.body = body;
+
+      // Callback with the error
       done(err);
     });
   },
+  'serves articles': [
+    function requestHomepage () {
+      this.url = 'http://localhost:11550/';
+    }, 'makeRequest',
+    function assertHomepage () {
+      expect(this.body).to.contain('the-wonderful-wizard-of-oz');
+      expect(this.body).to.contain('</footer>');
+    }
+  ],
   'serves an index page': function () {
 
   },
