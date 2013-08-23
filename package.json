@@ -13,7 +13,7 @@
     "node": ">= 0.4.0"
   },
   "scripts": {
-    "test": "doubleshot src-test"
+    "test": "doubleshot"
   },
   "dependencies": {
     "express": ">= 2.0.0",
