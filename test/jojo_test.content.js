@@ -10,15 +10,11 @@ module.exports = {
   },
 
   // Invoke jojo in various forms
-  'run via CLI': function () {
-
-  },
-  // TODO: Relocate logic into `this.cmd`, `this.args`, and helper fn
-  'integrated into a server': {
+  runChildProcess: {
     before: function spawnChildProcess (done) {
       // Start up a child server
       this.child = spawn('node', ['app.js'], {
-        cwd: __dirname + '/test_files/integrated',
+        cwd: this.cwd,
         // stdio: [0, 1, 2]
       });
 
@@ -36,9 +32,21 @@ module.exports = {
       });
     }
   },
-  'jojo running with no articles': function () {
+  'run via CLI': function () {
 
   },
+  'integrated into a server': [
+    function startIntegratedServer () {
+      this.cwd = __dirname + '/test_files/integrated';
+    },
+    'runChildProcess'
+  ],
+  'jojo running with no articles': [
+    function startEmptyServer () {
+      this.cwd = __dirname + '/test_files/empty_app';
+    },
+    'runChildProcess'
+  ],
 
   // Assertions against jojo
   makeRequest: function (done) {
@@ -76,6 +84,14 @@ module.exports = {
     }, 'makeRequest',
     function assertRss () {
       expect(this.body).to.contain('<id>1900-05-17-the-wonderful-wizard-of-oz</id>');
+    }
+  ],
+  'serves content': [
+    function requestEmptyHomepage () {
+      this.url = 'http://localhost:11550/index.xml';
+    }, 'makeRequest',
+    function assertEmptyHomepage () {
+      expect(this.body).to.contain('<section id="articles">');
     }
   ]
 };
