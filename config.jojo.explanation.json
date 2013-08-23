@@ -1,7 +1,0 @@
-{
-  // These are all config items that will be passed to the views in jojo (based heavily on toto)
-  "author": "Todd Wolfson", // blog author
-  "title": "jojo demo", // site title
-  "url": "http://localhost:8080/", // site url
-  "disqus": false // disqus id (optional)
-}
