@@ -10,43 +10,39 @@ module.exports = {
   },
 
   // Invoke jojo in various forms
-  runChildProcess: {
-    before: function spawnChildProcess (done) {
-      // Start up a child server
-      this.child = spawn('node', ['app.js'], {
-        cwd: this.cwd,
-        // stdio: [0, 1, 2]
-      });
-
-      // After it loads, callback
-      setTimeout(done, 200);
-    },
-    after: function killChildProcess (done) {
-      // Kill the child process
-      var child = this.child;
-      child.kill();
-
-      // When it leaves, callback
-      child.on('exit', function (code) {
-        done();
-      });
-    }
-  },
+  // runChildProcess: ,
   'run via CLI': function () {
 
   },
-  'integrated into a server': [
-    function startIntegratedServer () {
-      this.cwd = __dirname + '/test_files/integrated';
-    },
-    'runChildProcess'
-  ],
-  'jojo running with no articles': [
-    function startEmptyServer () {
+  'jojo running with no articles': {
+  // 'integrated into a server': {
+      before: function spawnChildProcess (done) {
       this.cwd = __dirname + '/test_files/empty_app';
-    },
-    'runChildProcess'
-  ],
+        // this.cwd = __dirname + '/test_files/integrated';
+        // Start up a child server
+        this.child = spawn('node', ['app.js'], {
+          cwd: this.cwd,
+          stdio: [0, 1, 2]
+        });
+
+        // After it loads, callback
+        setTimeout(done, 200);
+      },
+      after: function killChildProcess (done) {
+        // Kill the child process
+        var child = this.child;
+        child.kill();
+
+        // When it leaves, callback
+        child.on('exit', function (code) {
+          done();
+        });
+      }
+  },
+  //   function startEmptyServer () {
+  //   },
+  //   'runChildProcess'
+  // ],
 
   // Assertions against jojo
   makeRequest: function (done) {
@@ -88,7 +84,7 @@ module.exports = {
   ],
   'serves content': [
     function requestEmptyHomepage () {
-      this.url = 'http://localhost:11550/index.xml';
+      this.url = 'http://localhost:11550/';
     }, 'makeRequest',
     function assertEmptyHomepage () {
       expect(this.body).to.contain('<section id="articles">');

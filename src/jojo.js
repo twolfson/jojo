@@ -173,10 +173,18 @@ Yoyo.prototype = {
     articleDir = articleDir || app.settings['jojo articles'] || path.join(cwd, 'articles');
 
     fs.readdir(articleDir, function (err, articles) {
-      // If there is an error, log and callback with it
+      // If there is an error
       if (err) {
+        // Notify the user
         console.error('Article directory could not be read: ', articleDir);
-        return callback(err);
+
+        // If it is ENOENT, fallback to an empty array
+        if (err.code === 'ENOENT') {
+          articles = [];
+        } else {
+        // Otherwise, callback
+          return callback(err);
+        }
       }
 
       // Otherwise, read in all of the articles
