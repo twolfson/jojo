@@ -1,7 +1,7 @@
 - 'jojo':
-  - 'run via CLI':
-    - 'starts a server'
-    - 'serves articles'
+  # - 'run via CLI':
+  #   - 'starts a server'
+  #   - 'serves articles'
   - 'integrated into a server':
     - 'serves an index page'
     - 'serves articles'
