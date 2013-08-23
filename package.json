@@ -22,7 +22,8 @@
   },
   "devDependencies": {
     "doubleshot": "~2.10.0",
-    "request": "~2.27.0"
+    "request": "~2.27.0",
+    "ejs": "~0.8.4"
   },
   "optionalDependencies": {}
 }

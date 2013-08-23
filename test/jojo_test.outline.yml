@@ -5,7 +5,7 @@
     - 'serves an index page'
     - 'serves articles'
     - 'serves an RSS feed'
-- 'jojo running with no articles':
-  - 'serves an index page'
-  - 'serves articles'
-  - 'serves an RSS feed'
+# - 'jojo running with no articles':
+#   - 'serves an index page'
+#   - 'serves articles'
+#   - 'serves an RSS feed'
