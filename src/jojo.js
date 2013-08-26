@@ -60,6 +60,16 @@ ArticleCollection.prototype = {
   }
 };
 
+// Default URL formatter, 1900-05-17-the-wonderful-wizard-of-oz
+var moment = require('moment');
+function defaultUrlFormatter(article) {
+  var date = article.date,
+      dateStr = moment(date).format('YYYY-MM-DD'),
+      url = dateStr + '-' + article.title.replace(/\s+/g, '-');
+  url = url.toLowerCase();
+  return url;
+}
+
 // Define our jojo middleware
 function jojo(config) {
   // Create a new server
@@ -81,6 +91,12 @@ function jojo(config) {
 
   // Grab the articles
   var articles = collection.articles();
+
+  // For each article, generate a URL
+  var urlFormatter = config.urlFormatter || defaultUrlFormatter;
+  articles.forEach(function generateUrl (article) {
+    article.url = urlFormatter(article);
+  });
   console.log(articles);
 }
 module.exports = jojo;
