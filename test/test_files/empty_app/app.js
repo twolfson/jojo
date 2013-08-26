@@ -1,10 +1,10 @@
 // Require jojo and create a server
 var jojo = require('../../../src/jojo'),
     app = jojo({
+      "title": "jojo demo",
+      "url": "http://localhost:8080/",
       "defaults": {
-        "author": "Todd Wolfson",
-        "title": "jojo demo",
-        "url": "http://localhost:8080/"
+        "author": "Todd Wolfson"
       }
     });
 
