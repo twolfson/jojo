@@ -4,18 +4,26 @@ var fs = require('fs'),
     jsonContentDemux = require('json-content-demux'),
     marked = require('marked');
 
-function parseArticle(article, config) {
+// Class to handle storing articles
+function ArticleCollection(options) {
+  // Create placeholder for articles
+  this._articles = [];
+
+  // Fallback and save options for later
+  this.options = options || {};
+}
+ArticleCollection.parseArticle = function (article, options) {
   // Fallback options
-  config = config || {};
+  options = options || {};
 
   // Demux content
-  var demuxer = config.dataParser || jsonContentDemux,
+  var demuxer = options.dataParser || jsonContentDemux,
       demuxedArticle = demuxer(article),
       data = demuxedArticle.json,
       markup = demuxedArticle.content;
 
   // Render the content
-  var formatter = config.formatter || marked,
+  var formatter = options.formatter || marked,
       content = formatter(markup);
 
   // Add information to data
@@ -30,26 +38,27 @@ function parseArticle(article, config) {
     retObj.summary = formatter(data.summary);
   }
 
-  // TODO: Url formatting depends on how we started initialization
-  // // If there is no URL, fall it back
-  // if (!retObj.url) {
-  //   var urlFormatter = config.urlFormatter ||
-  //   retObj.url =
-  // }
-  // // retObj.url = retObj.url || jojo.getUrl(retObj);
-
   // Return the data
   return retObj;
-}
-
-function readArticle(filepath, config) {
-  // Fallback options
-  config = config || {};
-
-  // Read and parse the article
-  var article = fs.readFileSync(filepath, 'utf8');
-  return parseArticle(article, config);
-}
+};
+ArticleCollection.prototype = {
+  // Add a new article from plaintext
+  addArticle: function (text) {
+    // Parse and add the particle to our list
+    var article = ArticleCollection.parseArticle(text, this.options);
+    this._articles.push(article);
+  },
+  // Add a new article based on file path
+  addArticleFromFile: function (filepath) {
+    // Read and add the article
+    var text = fs.readFileSync(filepath, 'utf8');
+    this.addArticle(text, this.options);
+  },
+  // Return array of articles
+  articles: function () {
+    return this._articles;
+  }
+};
 
 // Define our jojo middleware
 function jojo(config) {
@@ -59,13 +68,19 @@ function jojo(config) {
   // Fallback options
   config = config || {};
 
-  // Locate articles from config
+  // Create a new collection for our articles
+  var collection = new ArticleCollection(config);
+
+  // Locate and add articles from config
   var articleDir = config.articles || process.cwd() + '/articles',
-      articleFiles = fs.readdirSync(articleDir),
-      articles = articleFiles.map(function readArticleFn (articleFile) {
-        var articlePath = articleDir + '/' + articleFile;
-        return readArticle(articlePath, config);
-      });
+      articleFiles = fs.readdirSync(articleDir);
+  articleFiles.forEach(function addArticleFn (articleFile) {
+    var articlePath = articleDir + '/' + articleFile;
+    collection.addArticleFromFile(articlePath);
+  });
+
+  // Grab the articles
+  var articles = collection.articles();
   console.log(articles);
 }
 module.exports = jojo;
