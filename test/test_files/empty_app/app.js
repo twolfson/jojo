@@ -1,6 +1,6 @@
 // Require jojo and create a server
 var jojo = require('../../../src/jojo'),
-    app = jojo.createServer();
+    app = jojo();
 
 app.listen(11550);
 

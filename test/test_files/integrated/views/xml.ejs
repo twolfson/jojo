@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><%=title%></title>
-  <id><%=url%></id>
+  <title><%=config.title%></title>
+  <id><%=config.url%></id>
 <%
   if (articles.length > 0) {
     var updatedDate = articles[0].date,
@@ -12,7 +12,7 @@
   }
 %>
   <author>
-    <name><%=author%></name>
+    <name><%=config.author%></name>
   </author>
 
 <%
@@ -22,10 +22,10 @@
     <title><%=article.title%></title>
     <link rel="alternate" href="<%=article.url%>"/>
     <id><%=article.url%></id>
-    <published><%=article.rawDate.toISOString()%></published>
-    <updated><%=article.rawDate.toISOString()%></updated>
+    <published><%=article.date.toISOString()%></published>
+    <updated><%=article.date.toISOString()%></updated>
     <author>
-      <name><%=author%></name>
+      <name><%=article.author || config.author%></name>
     </author>
     <summary type="html"><%=article.summary%></summary>
     <content type="html"><%=article.content%></content>

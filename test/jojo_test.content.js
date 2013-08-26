@@ -87,7 +87,7 @@ module.exports = {
       this.url = 'http://localhost:11550/index.xml';
     }, 'makeRequest',
     function assertRss () {
-      expect(this.body).to.contain('<id>1900-05-17-the-wonderful-wizard-of-oz</id>');
+      expect(this.body).to.contain('<id>/1900-05-17-the-wonderful-wizard-of-oz</id>');
     }
   ],
   'serves content': [

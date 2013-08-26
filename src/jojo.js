@@ -92,10 +92,12 @@ function jojo(config) {
   var articleSort = config.articleSort || jojo.articleSort;
   articles.sort(articleSort);
 
-  // On all routes, expose articles
+  // On all routes, expose articles and config
   app.use(function addArticles (req, res, next) {
     req.articles = articles;
+    req.config = config;
     res.locals.articles = articles;
+    res.locals.config = config;
     next();
   });
 
