@@ -60,21 +60,6 @@ ArticleCollection.prototype = {
   }
 };
 
-// Default URL formatter, 1900-05-17-the-wonderful-wizard-of-oz
-var moment = require('moment');
-function defaultUrlFormatter(article) {
-  var date = article.date,
-      dateStr = moment(date).format('YYYY-MM-DD'),
-      url = dateStr + '-' + article.title.replace(/\s+/g, '-');
-  url = url.toLowerCase();
-  return url;
-}
-
-// By default, sort by descending dates
-function defaultArticleSort(articleA, articleB) {
-  return articleB.rawDate - articleA.rawDate;
-}
-
 // Define our jojo middleware
 function jojo(config) {
   // Create a new server
@@ -98,13 +83,13 @@ function jojo(config) {
   var articles = collection.articles();
 
   // For each article, generate a URL
-  var urlFormatter = config.urlFormatter || defaultUrlFormatter;
+  var urlFormatter = config.urlFormatter || jojo.urlFormatter;
   articles.forEach(function generateUrl (article) {
     article.url = urlFormatter(article);
   });
 
   // Sort the articles
-  var articleSort = config.articleSort || defaultArticleSort;
+  var articleSort = config.articleSort || jojo.articleSort;
   articles.sort(articleSort);
 
   // On all routes, expose articles
@@ -122,5 +107,29 @@ function jojo(config) {
       next();
     });
   });
+
+  // TODO: There should be some option to render the content by default (opt-out)
+
+  // Return the app
+  return app;
 }
+// Default URL formatter, 1900-05-17-the-wonderful-wizard-of-oz
+var moment = require('moment');
+jojo.urlFormatter = function (article) {
+  var date = article.date,
+      dateStr = moment(date).format('YYYY-MM-DD'),
+      url = dateStr + '-' + article.title.replace(/\s+/g, '-');
+  url = url.toLowerCase();
+  return url;
+};
+
+// By default, sort by descending dates
+jojo.articleSort = function (articleA, articleB) {
+  return articleB.rawDate - articleA.rawDate;
+};
+
+// Expose ArticleCollection on jojo
+jojo.ArticleCollection = ArticleCollection;
+
+// Expose jojo
 module.exports = jojo;
