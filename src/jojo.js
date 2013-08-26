@@ -1,6 +1,6 @@
 // Load in dependencies
 var fs = require('fs'),
-    express = require('express'),
+    connect = require('connect'),
     _ = require('underscore'),
     jsonContentDemux = require('json-content-demux'),
     marked = require('marked');
@@ -66,9 +66,6 @@ ArticleCollection.prototype = {
 
 // Define our jojo middleware
 function jojo(config) {
-  // Create a new server
-  var app = express();
-
   // Fallback options
   config = config || {};
 
@@ -96,6 +93,9 @@ function jojo(config) {
   var articleSort = config.articleSort || jojo.articleSort;
   articles.sort(articleSort);
 
+  // Create a new server
+  var app = connect();
+
   // Expose articles on the app
   app.articles = articles;
 
@@ -110,14 +110,18 @@ function jojo(config) {
 
   // Serve each article at its url
   articles.forEach(function serveArticles (article) {
-    app.use(article.url, function serveArticleFn (req, res, next) {
-      req.article = article;
-      res.locals.article = article;
+    app.use(function serveArticleFn (req, res, next) {
+      // TODO: Verify this will work with query params
+      if (req.url === article.url) {
+        req.article = article;
+        res.locals.article = article;
+      }
       next();
     });
   });
 
   // If we are supposed to render, then render
+  // TODO: This won't work with current connect-only setup. Need to move to another function.
   var render = config.render === undefined ? true : config.render;
   if (render) {
     // Render the homepage
