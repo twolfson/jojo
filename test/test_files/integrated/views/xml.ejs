@@ -4,7 +4,7 @@
   <id><%=url%></id>
 <%
   if (articles.length > 0) {
-    var updatedDate = articles[0].rawDate,
+    var updatedDate = articles[0].date,
         updatedDateStr = updatedDate.toISOString();
 %>
   <updated><%=updatedDateStr%></updated>

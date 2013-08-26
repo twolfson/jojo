@@ -99,16 +99,46 @@ function jojo(config) {
     next();
   });
 
+  // Define methods to bind to all articles in one fell swoop
+  app.articles = {};
+  ['use', 'get', 'post', 'put', 'delete', 'options', 'all'].forEach(function bindArticleMethod (method) {
+    app.articles[method] = function (fn) {
+      // Iterate over the articles and use the middleware on it
+      articles.forEach(function saveArticleMethod (article) {
+        app[method](article.url, fn(article));
+      });
+    };
+  });
+
   // Serve each article at its url
-  articles.forEach(function serveArticles (article) {
-    app.use(article.url, function serveArticleFn (req, res, next) {
+  app.articles.use(function serveArticles (article) {
+    return function serveArticleFn (req, res, next) {
       req.article = article;
       res.locals.article = article;
       next();
-    });
+    };
   });
 
-  // TODO: There should be some option to render the content by default (opt-out)
+  // If we are supposed to render, then render
+  var render = config.render === undefined ? true : config.render;
+  if (render) {
+    // Render the homepage
+    app.get('/', function renderIndex (req, res) {
+      res.render('index');
+    });
+
+    // Render an XML webpage
+    app.get('/index.xml', function renderRss (req, res) {
+      res.render('xml');
+    });
+
+    // For each article, render it
+    app.articles.get(function renderArticles (article) {
+      return function renderArticleFn (req, res) {
+        res.render('article');
+      };
+    });
+  }
 
   // Return the app
   return app;
@@ -118,7 +148,7 @@ var moment = require('moment');
 jojo.urlFormatter = function (article) {
   var date = article.date,
       dateStr = moment(date).format('YYYY-MM-DD'),
-      url = dateStr + '-' + article.title.replace(/\s+/g, '-');
+      url = '/' + dateStr + '-' + article.title.replace(/\s+/g, '-');
   url = url.toLowerCase();
   return url;
 };
