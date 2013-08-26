@@ -1,6 +1,7 @@
 // Load in dependencies
 var fs = require('fs'),
     express = require('express'),
+    _ = require('underscore'),
     jsonContentDemux = require('json-content-demux'),
     marked = require('marked');
 
@@ -37,6 +38,9 @@ ArticleCollection.parseArticle = function (article, options) {
   if (data.summary) {
     retObj.summary = formatter(data.summary);
   }
+
+  // Add on defaults
+  _.defaults(retObj, options.defaults || {});
 
   // Return the data
   return retObj;
