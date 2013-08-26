@@ -1,5 +1,6 @@
 // Load in dependencies
 var fs = require('fs'),
+    url = require('url'),
     connect = require('connect'),
     _ = require('underscore'),
     jsonContentDemux = require('json-content-demux'),
@@ -113,8 +114,8 @@ function jojo(config) {
   // Serve each article at its url
   articles.forEach(function serveArticles (article) {
     app.use(function serveArticleFn (req, res, next) {
-      // TODO: Verify this will work with query params
-      if (req.url === article.url) {
+      var parsedUrl = url.parse(req.url);
+      if (parsedUrl.pathname === article.url) {
         req.article = article;
         res.locals({
           article: article
