@@ -103,8 +103,10 @@ function jojo(config) {
   app.use(function addArticles (req, res, next) {
     req.articles = articles;
     req.config = config;
-    res.locals.articles = articles;
-    res.locals.config = config;
+    res.locals({
+      articles: articles,
+      config: config
+    });
     next();
   });
 
@@ -114,7 +116,9 @@ function jojo(config) {
       // TODO: Verify this will work with query params
       if (req.url === article.url) {
         req.article = article;
-        res.locals.article = article;
+        res.locals({
+          article: article
+        });
       }
       next();
     });
