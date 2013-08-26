@@ -96,6 +96,9 @@ function jojo(config) {
   var articleSort = config.articleSort || jojo.articleSort;
   articles.sort(articleSort);
 
+  // Expose articles on the app
+  app.articles = articles;
+
   // On all routes, expose articles and config
   app.use(function addArticles (req, res, next) {
     req.articles = articles;
@@ -105,24 +108,13 @@ function jojo(config) {
     next();
   });
 
-  // Define methods to bind to all articles in one fell swoop
-  app.articles = {};
-  ['use', 'get', 'post', 'put', 'delete', 'options', 'all'].forEach(function bindArticleMethod (method) {
-    app.articles[method] = function (fn) {
-      // Iterate over the articles and use the middleware on it
-      articles.forEach(function saveArticleMethod (article) {
-        app[method](article.url, fn(article));
-      });
-    };
-  });
-
   // Serve each article at its url
-  app.articles.use(function serveArticles (article) {
-    return function serveArticleFn (req, res, next) {
+  articles.forEach(function serveArticles (article) {
+    app.use(article.url, function serveArticleFn (req, res, next) {
       req.article = article;
       res.locals.article = article;
       next();
-    };
+    });
   });
 
   // If we are supposed to render, then render
@@ -139,10 +131,10 @@ function jojo(config) {
     });
 
     // For each article, render it
-    app.articles.get(function renderArticles (article) {
-      return function renderArticleFn (req, res) {
+    articles.forEach(function renderArticles (article) {
+      app.get(article.url, function renderArticleFn (req, res) {
         res.render('article');
-      };
+      });
     });
   }
 
