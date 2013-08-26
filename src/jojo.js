@@ -70,6 +70,11 @@ function defaultUrlFormatter(article) {
   return url;
 }
 
+// By default, sort by descending dates
+function defaultArticleSort(articleA, articleB) {
+  return articleB.rawDate - articleA.rawDate;
+}
+
 // Define our jojo middleware
 function jojo(config) {
   // Create a new server
@@ -97,6 +102,25 @@ function jojo(config) {
   articles.forEach(function generateUrl (article) {
     article.url = urlFormatter(article);
   });
-  console.log(articles);
+
+  // Sort the articles
+  var articleSort = config.articleSort || defaultArticleSort;
+  articles.sort(articleSort);
+
+  // On all routes, expose articles
+  app.use(function addArticles (req, res, next) {
+    req.articles = articles;
+    res.locals.articles = articles;
+    next();
+  });
+
+  // Serve each article at its url
+  articles.forEach(function serveArticles (article) {
+    app.use(article.url, function serveArticleFn (req, res, next) {
+      req.article = article;
+      res.locals.article = article;
+      next();
+    });
+  });
 }
 module.exports = jojo;
