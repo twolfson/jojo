@@ -156,7 +156,7 @@ jojo.urlFormatter = function (article) {
   var date = article.date,
       dateStr = moment(date).format('YYYY-MM-DD'),
       url = dateStr + '-' + article.title.replace(/\s+/g, '-');
-  url = '/' + encodeURIComponent(url.toLowerCase());
+  url = '/' + url.toLowerCase();
   return url;
 };
 
