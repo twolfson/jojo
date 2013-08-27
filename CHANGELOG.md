@@ -1,7 +1,5 @@
 # jojo changelog
-## 1.0.0
-- Switched order of `rawDate` and `date`
-- `config.dataParser`, `config.formatter` no longer `require` based
+1.0.0 - Moved to new API to statically load assets and simplify code.
 
 0.2.0 - Added test suite and Travis CI. Scrapped old folder structure.
 
