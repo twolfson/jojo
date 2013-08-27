@@ -100,16 +100,26 @@ This is the directory to read articles from. It is processed relative to `proces
 Each article has
 
 - Any meta-data listed in the head of the file
-- ``, the split-up yet unprocessed body
-- `content`, the formatted body
+- `rawContent`, unprocessed body
+- `content`, formatted body
+- `rawDate`, unprocessed date (from meta-data)
+- `date`, `Date` object from `rawDate`
+- `url`, URL path for article. This can be modified via [options.urlFormatter][urlFormatter].
+- `rawSummary`, if `summary` is provided, this will be the unprocessed `summary`
+- `summary`, if `summary` is provided, this will be the formatted `summary`
 
 ### req.articles, res.locals.articles
 Same as `jojo.articles` but located on `req` and `res` for easy accessibility.
 
 ### req.article, res.locals.article
-On article pages, this will be the corresponding article.
+On article pages, this will be the corresponding `article`.
+
+See [urlFormatter][] for more `url` information
+
+[urlFormatter]:
 
 ### req.config, res.locals.config
+Configuration passed in to `jojo`. If invoked from standalone, this will be the as the `config`.
 
 ###
 
@@ -117,11 +127,6 @@ dataParser
 
 formatter
 
-rawDate
-date
-content
-rawContent
-url
 urlFormatter
 articleSort
 
