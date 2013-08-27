@@ -2,6 +2,7 @@
 var fs = require('fs'),
     url = require('url'),
     connect = require('connect'),
+    express = require('express'),
     _ = require('underscore'),
     jsonContentDemux = require('json-content-demux'),
     marked = require('marked');
@@ -126,9 +127,13 @@ function jojo(config) {
   });
 
   // If we are supposed to render, then render
-  // TODO: This won't work with current connect-only setup. Need to move to another function.
   var render = config.render === undefined ? true : config.render;
   if (render) {
+    // Convert the app into an express app
+    var jojoApp = app;
+    app = express();
+    app.use(jojoApp);
+
     // Render the homepage
     app.get('/', function renderIndex (req, res) {
       res.render('index');
