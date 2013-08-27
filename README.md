@@ -121,14 +121,29 @@ See [urlFormatter][] for more `url` information
 ### req.config, res.locals.config
 Configuration passed in to `jojo`. If invoked from standalone, this will be the as the `config`.
 
-###
+### jojo.dataParser
+`jojo.dataParser` is a `Function` to separate meta data from the body of an article.
 
-dataParser
+By default, this is [json-content-demux][]. If you are overriding, return an object containing meta data on `json` and body on `content`.
 
-formatter
+[json-content-demux]: https://github.com/twolfson/json-content-demux
 
-urlFormatter
-articleSort
+### jojo.formatter
+`jojo.formatter` is a `Function` to process the body into HTML markup.
+
+By default, [marked][] is used. If you are overriding, return a string of HTML.
+
+### jojo.urlFormatter
+`jojo.urlFormatter` is a `Function` that receives an article and returns a URL path.
+
+By default, it returns `/YYYY-MM-DD-article-name`. If you are overriding, return a string.
+
+### jojo.articleSort
+`jojo.articleSort` is a `Function` that compares articles to determine their order.
+
+By default, it returns articles by most recent. If you are overriding, you will receive two articles and need to return an integer. See [Array.sort][] documentation for more information.
+
+[Array.sort]:
 
 ## Donating
 Support this project and [others by twolfson][gittip] via [gittip][].
