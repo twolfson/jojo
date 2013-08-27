@@ -2,13 +2,13 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link rel="alternate" type="application/atom+xml" title="<%= title %> - feed" href="/index.xml" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
-    <title><%= title %></title>
+    <link rel="alternate" type="application/atom+xml" title="<%= config.title %> - feed" href="/index.xml" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title><%= config.title %></title>
   </head>
   <body>
     <section>
-      <%- body %> 
+      <%- body %>
     </section>
     <footer>
       powered by <a href="https://github.com/twolfson/jojo">jojo</a>

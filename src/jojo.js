@@ -131,7 +131,7 @@ function jojo(config) {
   if (render) {
     // Convert the app into an express app
     var jojoApp = app;
-    app = express();
+    app = express.createServer();
     app.use(jojoApp);
 
     // Render the homepage
