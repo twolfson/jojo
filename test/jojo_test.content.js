@@ -29,6 +29,17 @@ module.exports = {
       });
     }
   },
+  'run via CLI': [
+    function startIntegratedServer () {
+      this.cmd = 'node';
+      this.args = ['../../../bin/jojo'];
+      this.options = {
+        cwd:  __dirname + '/test_files/cli',
+        // stdio: [0, 1, 2]
+      };
+    },
+    'runChildProcess'
+  ],
   'integrated into a server': [
     function startIntegratedServer () {
       this.cmd = 'node';
