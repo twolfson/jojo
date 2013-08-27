@@ -162,7 +162,7 @@ jojo.urlFormatter = function (article) {
 
 // By default, sort by descending dates
 jojo.articleSort = function (articleA, articleB) {
-  return articleB.rawDate - articleA.rawDate;
+  return articleB.date - articleA.date;
 };
 
 // Expose ArticleCollection on jojo
