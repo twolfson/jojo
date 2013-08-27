@@ -1,7 +1,7 @@
 # jojo [![Build status](https://travis-ci.org/twolfson/jojo.png?branch=master)](https://travis-ci.org/twolfson/jojo)
 the 10 second blog-engine for hackers (in javascript).
 
-It was built for running as middleware inside an [express][] app but can be run standalone.
+It was built for running as middleware inside an [express][] app as well as a standalone application.
 
 [express]: http://expressjs.com/2x/
 
@@ -78,7 +78,8 @@ jojo();
 jojo(options);
 /**
  * @param {Object} [options] Optional options to pass in to jojo
- * @returns {Function|Object} Based on options, returns a req/res/next function or express 2.x app.
+ * @returns {Function|Object} Based on options, returns
+ *   a req/res/next function or express 2.x app.
  */
 ```
 
