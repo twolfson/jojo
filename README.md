@@ -155,7 +155,7 @@ Support this project and [others by twolfson][gittip] via [gittip][].
 [gittip]: https://www.gittip.com/twolfson/
 
 ## Attribution
-`jojo` was iniitally inspired by [toto][].
+`jojo` was initially inspired by [toto][].
 
 [toto]: https://github.com/cloudhead/toto
 
