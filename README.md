@@ -72,8 +72,10 @@ Options:
 ```js
 jojo();
 jojo(options);
-@param {Object} [options] Optional options to pass in to jojo
-@returns {Function|Object} Depending on the options, returns a req/res/next function or express 2.x app.
+/**
+ * @param {Object} [options] Optional options to pass in to jojo
+ * @returns {Function|Object} Based on options, returns a req/res/next function or express 2.x app.
+ */
 ```
 
 ```js
