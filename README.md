@@ -69,6 +69,10 @@ Options:
 ## Documentation
 `jojo` has a wide spectrum of options
 
+
+### jojo
+`jojo` has an optional `options` parameter which modifies its behavior.
+
 ```js
 jojo();
 jojo(options);
@@ -78,9 +82,48 @@ jojo(options);
  */
 ```
 
-```js
-@param {Boolean} [options.render=true] By default, triggers return of express 2.x app. Otherwise, returns req/res/next middleware.
-```
+### options.render
+`options.render` is expected as a `Boolean` and `true` by default.
+
+When true, an [express 2.x][express] app will be returned by `jojo`.
+
+Otherwise, a `req`/`res`/`next` middleware will be returned.
+
+### options.articles
+`options.articles` is expected as a `String` and `articles` by default.
+
+This is the directory to read articles from. It is processed relative to `process.cwd()`.
+
+### jojo.articles
+`jojo.articles` is a sorted array of the parsed articles.
+
+Each article has
+
+- Any meta-data listed in the head of the file
+- ``, the split-up yet unprocessed body
+- `content`, the formatted body
+
+### req.articles, res.locals.articles
+Same as `jojo.articles` but located on `req` and `res` for easy accessibility.
+
+### req.article, res.locals.article
+On article pages, this will be the corresponding article.
+
+### req.config, res.locals.config
+
+###
+
+dataParser
+
+formatter
+
+rawDate
+date
+content
+rawContent
+url
+urlFormatter
+articleSort
 
 ## Donating
 Support this project and [others by twolfson][gittip] via [gittip][].
