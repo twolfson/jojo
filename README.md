@@ -35,7 +35,7 @@ var app = jojo(); // express app
 var app = jojo({render: false}); // vanilla middleware
 ```
 
-By default, `jojo` reads articles from `articles` directory but this can be overridden via an option
+By default, `jojo` reads articles from `articles` directory but this can be overridden via an option.
 
 ```js
 var app = jojo({articles: 'papers'}); // Read articles from `papers`
@@ -65,6 +65,20 @@ Options:
 ```
 
 > `port` can also be specified in `jojo.js`/`jojo.json`
+
+## Documentation
+`jojo` has a wide spectrum of options
+
+```js
+jojo();
+jojo(options);
+@param {Object} [options] Optional options to pass in to jojo
+@returns {Function|Object} Depending on the options, returns a req/res/next function or express 2.x app.
+```
+
+```js
+@param {Boolean} [options.render=true] By default, triggers return of express 2.x app. Otherwise, returns req/res/next middleware.
+```
 
 ## Donating
 Support this project and [others by twolfson][gittip] via [gittip][].
