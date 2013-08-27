@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+
+// Load in dependencies
+var path = require('path'),
+    program = require('commander'),
+    pkg = require('../package');
+
+// Process arguments
+program
+  .version(pkg.version)
+  .option('-c, --config [config]', 'Config file to use (jojo.js, jojo.json)')
+  .option('-p, --port [port]', 'Port to run server on (5000)')
+  .parse(process.argv);
+
+// Attempt to load in `jojo.json`
+var config = {},
+    configPath = path.join(process.cwd(), program.config || 'jojo');
+try {
+  config = require(configPath);
+} catch (e) {
+  // Warn the user that the config could not be loaded
+  console.error('Config "' + configPath + '" could not be loaded.');
+}
+
+// Fallback each config item
+config.port = program.port || config.port || 5000;
+config['view engine'] = config['view engine'] || 'ejs';
+
+// Generate a jojo app with our config
+var jojo = require('../src/jojo'),
+    app = jojo(config);
+
+// Set all config items on the app
+Object.getOwnPropertyNames(config).forEach(function saveConfig (key) {
+  app.set(key, config[key]);
+});
+
+// Listen on the port specified
+app.listen(config.port);
+
+// Notify the user the app is running
+console.log('Server is listening to http://127.0.0.1:' + config.port);
