@@ -28,6 +28,27 @@ app.listen(5000);
 ### Middleware
 `jojo` is available via npm: `npm install jojo`
 
+`jojo` is invoked with a configuration and can return a middleware or [express][] app.
+
+```js
+var app = jojo(); // express app
+var app = jojo({render: false}); // vanilla middleware
+```
+
+By default, `jojo` reads articles from `articles` directory but this can be overridden via an option
+
+```js
+var app = jojo({articles: 'papers'}); // Read articles from `papers`
+```
+
+By default, all articles are interpretted via [marked][], a [GitHub flavored markdown][gfm] parser.
+
+More configuration options can be found in the [documentation][].
+
+[marked]: https://github.com/chjj/marked
+[gfm]: http://github.github.com/github-flavored-markdown/
+[documentation]: #documentation
+
 ### Standalone
 To run `jojo` as a standalone server, install `jojo` globally: `npm install -g jojo`.
 
