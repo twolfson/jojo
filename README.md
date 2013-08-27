@@ -116,7 +116,7 @@ On article pages, this will be the corresponding `article`.
 
 See [urlFormatter][] for more `url` information
 
-[urlFormatter]:
+[urlFormatter]: #jojourlformatter
 
 ### req.config, res.locals.config
 Configuration passed in to `jojo`. If invoked from standalone, this will be the as the `config`.
@@ -141,9 +141,9 @@ By default, it returns `/YYYY-MM-DD-article-name`. If you are overriding, return
 ### jojo.articleSort
 `jojo.articleSort` is a `Function` that compares articles to determine their order.
 
-By default, it returns articles by most recent. If you are overriding, you will receive two articles and need to return an integer. See [Array.sort][] documentation for more information.
+By default, it returns articles by most recent. If you are overriding, you will receive two articles and need to return an integer. See [Array.prototype.sort][] documentation for more information.
 
-[Array.sort]:
+[Array.prototype.sort]: :https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 
 ## Donating
 Support this project and [others by twolfson][gittip] via [gittip][].
