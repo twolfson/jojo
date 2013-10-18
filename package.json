@@ -26,7 +26,8 @@
     "underscore": "~1.5.1",
     "connect": "~2.8.5",
     "commander": "~2.0.0",
-    "ejs": "~0.8.4"
+    "ejs": "~0.8.4",
+    "glob": "~3.2.6"
   },
   "devDependencies": {
     "doubleshot": "~2.12.0",

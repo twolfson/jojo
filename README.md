@@ -35,10 +35,14 @@ var app = jojo(); // express app
 var app = jojo({render: false}); // vanilla middleware
 ```
 
-By default, `jojo` reads articles from `articles` directory but this can be overridden via an option.
+By default, `jojo` reads articles that match `articles/*.{txt,md}` (`txt` and `md` files in `articles` directory) but this can be overridden via an option.
+
+If you want more information on pattern options, see [node-glob][] reference.
+
+[node-glob]: https://github.com/isaacs/node-glob
 
 ```js
-var app = jojo({articles: 'papers'}); // Read articles from `papers`
+var app = jojo({articles: 'papers/*.md'}); // Read articles from `papers`
 ```
 
 By default, all articles are interpretted via [marked][], a [GitHub flavored markdown][gfm] parser.

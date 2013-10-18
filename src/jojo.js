@@ -2,6 +2,7 @@
 var fs = require('fs'),
     url = require('url'),
     connect = require('connect'),
+    glob = require('glob'),
     express = require('express'),
     _ = require('underscore'),
     jsonContentDemux = require('json-content-demux'),
@@ -75,10 +76,9 @@ function jojo(config) {
   var collection = new ArticleCollection(config);
 
   // Locate and add articles from config
-  var articleDir = config.articles || process.cwd() + '/articles',
-      articleFiles = fs.readdirSync(articleDir);
-  articleFiles.forEach(function addArticleFn (articleFile) {
-    var articlePath = articleDir + '/' + articleFile;
+  var articlePattern = config.articles || process.cwd() + '/articles/*.{txt,md}',
+      articleFiles = glob.sync(articlePattern);
+  articleFiles.forEach(function addArticleFn (articlePath) {
     collection.addArticleFromFile(articlePath);
   });
 
