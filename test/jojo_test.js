@@ -77,6 +77,13 @@ describe('jojo', function () {
       });
     });
 
+    describe('with respect to a URL unfriendly article', function () {
+      testUtils.request('http://localhost:11550/1900-05-17-plus-colon-hello');
+      it('slugifies article titles', function () {
+        expect(this.res.statusCode).to.equal(200);
+      });
+    });
+
     describe('with response to RSS', function () {
       testUtils.request('http://localhost:11550/index.xml');
       it('serves an RSS feed', function () {
