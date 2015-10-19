@@ -6,7 +6,8 @@ var fs = require('fs'),
     express = require('express'),
     _ = require('underscore'),
     jsonContentDemux = require('json-content-demux'),
-    marked = require('marked');
+    marked = require('marked'),
+    slugg = require('slugg');
 
 // Class to handle storing articles
 function ArticleCollection(options) {
@@ -160,7 +161,7 @@ var moment = require('moment');
 jojo.urlFormatter = function (article) {
   var date = article.date,
       dateStr = moment(date).format('YYYY-MM-DD'),
-      url = dateStr + '-' + article.title.replace(/\s+/g, '-');
+      url = dateStr + '-' + slugg(article.title);
   url = '/' + url.toLowerCase();
   return url;
 };
