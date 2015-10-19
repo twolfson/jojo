@@ -47,7 +47,7 @@ var testUtils = {
 
 describe('jojo', function () {
   describe('run via CLI', function () {
-    testUtils.spawn('node', [__dirname + '../../../bin/jojo'], {
+    testUtils.spawn('node', ['../../../bin/jojo'], {
       cwd: __dirname + '/test_files/cli'
     });
 
