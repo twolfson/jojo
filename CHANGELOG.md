@@ -1,4 +1,6 @@
 # jojo changelog
+1.1.1 - Added `foundry` for releases
+
 1.1.0 - Moved to glob for less greedy pattern matching. By default, articles must end in `.md` or `.txt`
 
 1.0.0 - Moved to new API to statically load assets and simplify code.

@@ -2,7 +2,7 @@
   "author": "Todd Wolfson <todd@twolfson.com> (http://twolfson.com/)",
   "name": "jojo",
   "description": "the 10 second blog-engine for hackers (in javascript)",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "homepage": "https://github.com/twolfson/jojo",
   "repository": {
     "type": "git",
