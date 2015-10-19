@@ -7,7 +7,7 @@ var testUtils = {
   spawn: function (cmd, args, options) {
     before(function spawnChildProcess (done) {
       // Start up a child server
-      this.child = spawn(this.cmd, this.args, this.options);
+      this.child = spawn(cmd, args, options);
 
       // After it loads, callback
       setTimeout(done, 200);
@@ -24,10 +24,10 @@ var testUtils = {
       });
     });
   },
-  request: function () {
+  request: function (url) {
     before(function requestFn (done) {
       var that = this;
-      request(this.url, function handleResponse (err, res, body) {
+      request(url, function handleResponse (err, res, body) {
         // Save the error, response, and body
         that.err = err;
         that.res = res;
@@ -88,8 +88,7 @@ describe('jojo', function () {
 
 describe('jojo running with no articles', function () {
   testUtils.spawn('node', ['app.js'], {
-    // TODO: Move this to `empty_app
-    cwd: __dirname + '/test_files/integrated'
+    cwd: __dirname + '/test_files/empty_app'
   });
 
   testUtils.request('http://localhost:11550/');
