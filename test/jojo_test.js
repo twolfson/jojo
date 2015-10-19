@@ -47,34 +47,53 @@ var testUtils = {
 
 describe('jojo', function () {
   describe('run via CLI', function () {
-    testUtils.spawn('node', __dirname + '../../../bin/jojo', {
+    testUtils.spawn('node', [__dirname + '../../../bin/jojo'], {
       cwd: __dirname + '/test_files/cli'
     });
-    it('serves articles', function () {
 
+    testUtils.request('http://localhost:11550/1900-05-17-the-wonderful-wizard-of-oz');
+    it('serves articles', function () {
+      expect(this.body).to.contain('<h1>The Wonderful Wizard of Oz</h1>');
     });
   });
 
   describe('integrated into a server', function () {
-    testUtils.spawn('node', 'app.js', {
+    testUtils.spawn('node', ['app.js'], {
       cwd: __dirname + '/test_files/integrated'
     });
-    it('serves an index page', function () {
 
+    describe('with response to an index page', function () {
+      testUtils.request('http://localhost:11550/');
+      it('serves an index page', function () {
+        expect(this.body).to.contain('<section id="articles">');
+        expect(this.body).to.contain('the-wonderful-wizard-of-oz');
+      });
     });
-    it('serves articles', function () {
 
+    describe('with respect to articles', function () {
+      testUtils.request('http://localhost:11550/1900-05-17-the-wonderful-wizard-of-oz');
+      it('serves articles', function () {
+        expect(this.body).to.contain('<h1>The Wonderful Wizard of Oz</h1>');
+      });
     });
-    it('serves an RSS feed', function () {
 
+    describe('with response to RSS', function () {
+      testUtils.request('http://localhost:11550/index.xml');
+      it('serves an RSS feed', function () {
+        expect(this.body).to.contain('<id>/1900-05-17-the-wonderful-wizard-of-oz</id>');
+      });
     });
   });
 });
+
 describe('jojo running with no articles', function () {
-  testUtils.spawn('node', 'app.js', {
+  testUtils.spawn('node', ['app.js'], {
+    // TODO: Move this to `empty_app
     cwd: __dirname + '/test_files/integrated'
   });
-  it('serves content', function () {
 
+  testUtils.request('http://localhost:11550/');
+  it('serves content', function () {
+    expect(this.body).to.contain('<section id="articles">');
   });
 });
