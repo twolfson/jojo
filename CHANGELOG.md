@@ -1,4 +1,6 @@
 # jojo changelog
+3.0.0 - Updated article dates to be based on timezone provided by date
+
 2.0.0 - Added proper URL slugifying via `slugg`
 
 1.1.2 - Moved from `doubleshot` to `mocha` due to `doubleshot` staleness
