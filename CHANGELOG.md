@@ -1,4 +1,6 @@
 # jojo changelog
+2.0.0 - Added proper URL slugifying via `slugg`
+
 1.1.2 - Moved from `doubleshot` to `mocha` due to `doubleshot` staleness
 
 1.1.1 - Added `foundry` for releases
