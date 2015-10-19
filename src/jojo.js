@@ -7,6 +7,7 @@ var fs = require('fs'),
     _ = require('underscore'),
     jsonContentDemux = require('json-content-demux'),
     marked = require('marked'),
+    moment = require('moment'),
     slugg = require('slugg');
 
 // Class to handle storing articles
@@ -34,7 +35,11 @@ ArticleCollection.parseArticle = function (article, options) {
   // Add information to data
   var retObj = data;
   retObj.rawDate = retObj.date;
-  retObj.date = new Date(retObj.date);
+  // https://github.com/moment/moment/blob/cd49a734350193a244c596a02167221cbca2c06f/moment.js#L1623-L1631
+  // Parse moment with timezone attached to it
+  retObj.moment = moment(retObj.date).parseZone();
+  // DEV: Warning this date will be using server timezone
+  retObj.date = retObj.moment.toDate();
   retObj.content = content;
   retObj.rawContent = markup;
 
@@ -157,10 +162,8 @@ function jojo(config) {
   return app;
 }
 // Default URL formatter, 1900-05-17-the-wonderful-wizard-of-oz
-var moment = require('moment');
 jojo.urlFormatter = function (article) {
-  var date = article.date,
-      dateStr = moment(date).format('YYYY-MM-DD'),
+  var dateStr = article.moment.format('YYYY-MM-DD'),
       url = dateStr + '-' + slugg(article.title);
   url = '/' + url.toLowerCase();
   return url;

@@ -109,6 +109,7 @@ Each article has
 - `content`, formatted body
 - `rawDate`, unprocessed date (from meta-data)
 - `date`, `Date` object from `rawDate`
+- `moment`, `moment` object from `rawDate` (uses timezone from `rawDate`)
 - `url`, URL path for article. This can be modified via [options.urlFormatter][urlFormatter].
 - `rawSummary`, if `summary` is provided, this will be the unprocessed `summary`
 - `summary`, if `summary` is provided, this will be the formatted `summary`
