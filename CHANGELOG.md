@@ -1,4 +1,6 @@
 # jojo changelog
+1.1.2 - Moved from `doubleshot` to `mocha` due to `doubleshot` staleness
+
 1.1.1 - Added `foundry` for releases
 
 1.1.0 - Moved to glob for less greedy pattern matching. By default, articles must end in `.md` or `.txt`
