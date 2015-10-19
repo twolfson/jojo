@@ -10,7 +10,7 @@ var testUtils = {
       this.child = spawn(cmd, args, options);
 
       // After it loads, callback
-      setTimeout(done, 200);
+      setTimeout(done, 1000);
     });
     after(function killChildProcess (done) {
       // Kill the child process
