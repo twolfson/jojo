@@ -1,4 +1,6 @@
 # jojo changelog
+3.1.0 - Upgraded to latest EJS to resolve security issues
+
 3.0.2 - Replaced Gratipay with support me page
 
 3.0.1 - Added missing upgrade for `moment`
