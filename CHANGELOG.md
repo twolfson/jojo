@@ -1,4 +1,6 @@
 # jojo changelog
+3.1.1 - Upgraded to latest Marked and Moment to resolve security issues
+
 3.1.0 - Upgraded to latest EJS to resolve security issues
 
 3.0.2 - Replaced Gratipay with support me page
