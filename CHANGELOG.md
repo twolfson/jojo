@@ -1,4 +1,6 @@
 # jojo changelog
+3.0.2 - Replaced Gratipay with support me page
+
 3.0.1 - Added missing upgrade for `moment`
 
 3.0.0 - Updated article dates to be based on timezone provided by date
