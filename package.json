@@ -21,7 +21,7 @@
   "dependencies": {
     "commander": "~2.0.0",
     "connect": "~2.8.5",
-    "ejs": "~0.8.4",
+    "ejs": "~2.5.7",
     "express": "~2.5.11",
     "glob": "~3.2.6",
     "json-content-demux": "~0.1.3",
