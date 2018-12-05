@@ -1,4 +1,6 @@
 # jojo changelog
+3.3.0 - Upgraded to request@2.88.0 to fix GitHub vulnerability warning
+
 3.2.0 - Upgraded to express@3.21.2 to fix GitHub vulnerability warning
 
 3.1.1 - Upgraded to latest Marked and Moment to resolve security issues
