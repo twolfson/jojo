@@ -111,7 +111,7 @@ function jojo(config) {
   app.use(function addArticles (req, res, next) {
     req.articles = articles;
     req.config = config;
-    res.locals({
+    Object.assign(res.locals, {
       articles: articles,
       config: config
     });
@@ -124,7 +124,7 @@ function jojo(config) {
       var parsedUrl = url.parse(req.url);
       if (parsedUrl.pathname === article.url) {
         req.article = article;
-        res.locals({
+        Object.assign(res.locals, {
           article: article
         });
       }
@@ -137,7 +137,7 @@ function jojo(config) {
   if (render) {
     // Convert the app into an express app
     var jojoApp = app;
-    app = express.createServer();
+    app = express();
     app.use(jojoApp);
 
     // Render the homepage
